@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AftabeKetab.API", "AftabeKetab.API\AftabeKetab.API.csproj", "{FF10D574-A52B-41F0-8479-7DF7D2E59DCA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AftabeKetab.DataModels", "AftabeKetab.DataModels\AftabeKetab.DataModels.csproj", "{D0FE0107-7DCC-4384-9586-28013B45967C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FF10D574-A52B-41F0-8479-7DF7D2E59DCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF10D574-A52B-41F0-8479-7DF7D2E59DCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF10D574-A52B-41F0-8479-7DF7D2E59DCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF10D574-A52B-41F0-8479-7DF7D2E59DCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0FE0107-7DCC-4384-9586-28013B45967C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0FE0107-7DCC-4384-9586-28013B45967C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0FE0107-7DCC-4384-9586-28013B45967C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0FE0107-7DCC-4384-9586-28013B45967C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A40ED7D2-66DD-47E0-A76C-1749FC840656}
+	EndGlobalSection
+EndGlobal
