@@ -1,10 +1,10 @@
 ﻿namespace AftabeKetab.DataModels
 {
-    public class EntityAuthor : EntityBase
+    public class AuthorEntity : BaseEntity
     {
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
 
-        public List<EntityBook>? Books { get; set; }
+        public List<BookEntity>? Books { get; set; }
     }
 }

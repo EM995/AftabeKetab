@@ -12,72 +12,72 @@ namespace AftabeKetab.DataModels
         }
 
         // Sales schema
-        public DbSet<EntityUser>? Users { get; set; }
-        public DbSet<EntityAddress>? Addresses { get; set; }
-        public DbSet<EntityOrder>? Orders { get; set; }
-        public DbSet<EntityOrderItems>? OrderItems { get; set; }
+        public DbSet<UserEntity>? Users { get; set; }
+        public DbSet<AddressEntity>? Addresses { get; set; }
+        public DbSet<OrderEntity>? Orders { get; set; }
+        public DbSet<OrderItemsEntity>? OrderItems { get; set; }
         // Book schema
-        public DbSet<EntityBook>? Books { get; set; }
-        public DbSet<EntityAuthor>? Authors { get; set; }
-        public DbSet<EntityCategory>? Categories { get; set; }
+        public DbSet<BookEntity>? Books { get; set; }
+        public DbSet<AuthorEntity>? Authors { get; set; }
+        public DbSet<CategoryEntity>? Categories { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<EntityUser>().ToTable("users", "sales");
-            modelBuilder.Entity<EntityAddress>().ToTable("addresses", "sales");
-            modelBuilder.Entity<EntityOrder>().ToTable("orders", "sales");
-            modelBuilder.Entity<EntityOrderItems>().ToTable("order_items", "sales");
-            modelBuilder.Entity<EntityBook>().ToTable("books", "book");
-            modelBuilder.Entity<EntityAuthor>().ToTable("authors", "book");
-            modelBuilder.Entity<EntityCategory>().ToTable("categories", "book");
+            modelBuilder.Entity<UserEntity>().ToTable("users", "sales");
+            modelBuilder.Entity<AddressEntity>().ToTable("addresses", "sales");
+            modelBuilder.Entity<OrderEntity>().ToTable("orders", "sales");
+            modelBuilder.Entity<OrderItemsEntity>().ToTable("order_items", "sales");
+            modelBuilder.Entity<BookEntity>().ToTable("books", "book");
+            modelBuilder.Entity<AuthorEntity>().ToTable("authors", "book");
+            modelBuilder.Entity<CategoryEntity>().ToTable("categories", "book");
 
             // Configure Primary-Key and Foreign-Keys.
             // Configure Relationships between entities.
             //
             // User and Address
-            modelBuilder.Entity<EntityUser>()
+            modelBuilder.Entity<UserEntity>()
                 .HasKey(u => u.Id)
-                .HasRequired<EntityAddress>(u => u.ShippingAddress)
+                .HasRequired<AddressEntity>(u => u.ShippingAddress)
                 .WithMany(a => a.Users)
                 .HasForeignKey(u => u.AddressId);
             // Order and Seller
-            modelBuilder.Entity<EntityOrder>()
+            modelBuilder.Entity<OrderEntity>()
                 .HasKey(o => o.Id)
-                .HasRequired<EntityUser>(o => o.Seller)
+                .HasRequired<UserEntity>(o => o.Seller)
                 .WithMany(u => u.OrdersAsSeller)
                 .HasForeignKey(o => o.SellerId);
             // Order and Buyer
-            modelBuilder.Entity<EntityOrder>()
-                .HasRequired<EntityUser>(o => o.Buyer)
+            modelBuilder.Entity<OrderEntity>()
+                .HasRequired<UserEntity>(o => o.Buyer)
                 .WithMany(u => u.OrdersAsBuyer)
                 .HasForeignKey(o => o.BuyerId);
             // Order and OrderItems
-            modelBuilder.Entity<EntityOrder>()
-                .HasOptional<EntityOrderItems>(o => o.Items)
+            modelBuilder.Entity<OrderEntity>()
+                .HasOptional<OrderItemsEntity>(o => o.Items)
                 .WithOptionalDependent(i => i.Order)
                 .Map(o => o.MapKey("ItemsId"));
-            modelBuilder.Entity<EntityOrderItems>()
-                .HasOptional<EntityOrder>(i => i.Order)
+            modelBuilder.Entity<OrderItemsEntity>()
+                .HasOptional<OrderEntity>(i => i.Order)
                 .WithOptionalDependent(o => o.Items)
                 .Map(i => i.MapKey("OrderId"));
             // Book and User
-            modelBuilder.Entity<EntityBook>()
+            modelBuilder.Entity<BookEntity>()
                 .HasKey(b => b.Id)
-                .HasRequired<EntityUser>(b => b.Owner)
+                .HasRequired<UserEntity>(b => b.Owner)
                 .WithMany(u => u.Books)
                 .HasForeignKey(b => b.OwnerId);
             // Book and OrderItems
-            modelBuilder.Entity<EntityBook>()
-                .HasOptional<EntityOrderItems>(b => b.OrderItem)
+            modelBuilder.Entity<BookEntity>()
+                .HasOptional<OrderItemsEntity>(b => b.OrderItem)
                 .WithMany(i => i.Books)
                 .HasForeignKey(b => b.OrderItemId);
             // Book and Category
-            modelBuilder.Entity<EntityBook>()
-                .HasMany<EntityCategory>(b => b.Categories)
+            modelBuilder.Entity<BookEntity>()
+                .HasMany<CategoryEntity>(b => b.Categories)
                 .WithMany(c => c.Books);
             // Book and Author
-            modelBuilder.Entity<EntityBook>()
-                .HasRequired<EntityAuthor>(b => b.Author)
+            modelBuilder.Entity<BookEntity>()
+                .HasRequired<AuthorEntity>(b => b.Author)
                 .WithMany(a => a.Books)
                 .HasForeignKey(b => b.AuthorId);
         }

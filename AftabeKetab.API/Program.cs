@@ -1,6 +1,10 @@
+using AftabeKetab.API.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddAllAftabeKetabServices(); // This project's services
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
